@@ -1,10 +1,11 @@
-/* body {
-  margin: 0;
-  padding: 20px;
-  background: #f5f6f8;
-  font-family: 'Segoe UI', sans-serif;
-  color: #222;
-} */
+.lecture-header {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+    border-radius: 8px;
+    color: #333;
+}
 
 body {
   margin: 0;
@@ -110,4 +111,5 @@ button.loading {
   to {
     transform: rotate(360deg);
   }
+
 }

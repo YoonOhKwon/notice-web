@@ -96,6 +96,21 @@ button.loading {
 }
 
 
+#download-button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+#download-button:hover {
+    background-color: #357ABD;
+}
+
 #loading-spinner {
   display: none;
   width: 16px;
@@ -113,3 +128,4 @@ button.loading {
   }
 
 }
+

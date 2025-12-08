@@ -1,3 +1,52 @@
+let ACCESS_TOKEN = localStorage.getItem("token") || null;
+
+// 🔐 로그인 기능
+async function login() {
+    const id = document.getElementById("login-id").value;
+    const pw = document.getElementById("login-pw").value;
+
+    if (!id || !pw) {
+        alert("아이디와 비밀번호를 입력하세요!");
+        return;
+    }
+
+    let form = new FormData();
+    form.append("username", id);
+    form.append("password", pw);
+
+    try {
+        let res = await fetch("https://hufsmate-production.up.railway.app/login", {
+            method: "POST",
+            body: form
+        });
+
+        if (!res.ok) {
+            document.getElementById("login-status").innerText = "로그인 실패!";
+            return;
+        }
+
+        let data = await res.json();
+        ACCESS_TOKEN = data.access_token;
+
+        // 저장
+        localStorage.setItem("token", ACCESS_TOKEN);
+
+        document.getElementById("login-status").innerText = "로그인 성공!";
+
+        // 로그인 박스 숨김
+        document.getElementById("login-box").style.display = "none";
+
+        // 공지 불러오기 시작
+        loadNotices();
+
+    } catch (err) {
+        console.error("로그인 오류:", err);
+        document.getElementById("login-status").innerText = "서버 오류!";
+    }
+}
+
+
+
 const classColors = [
     "#E8F0FF",  // 강의 0 배경색
     "#FFF7D6",  // 강의 1 배경색
@@ -152,4 +201,5 @@ async function refreshCache() {
     button.disabled = false;
     button.innerText = "🔄 강의 목록 새로고침";
 }
+
 

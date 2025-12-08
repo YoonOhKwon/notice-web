@@ -1,53 +1,3 @@
-let ACCESS_TOKEN = localStorage.getItem("token") || null;
-
-// 🔐 로그인 기능
-async function login() {
-    const id = document.getElementById("login-id").value;
-    const pw = document.getElementById("login-pw").value;
-
-    if (!id || !pw) {
-        alert("아이디와 비밀번호를 입력하세요!");
-        return;
-    }
-
-    let form = new FormData();
-    form.append("username", id);
-    form.append("password", pw);
-
-    try {
-        let res = await fetch("https://hufsmate-production.up.railway.app/login", {
-            method: "POST",
-            body: form
-        });
-
-        if (!res.ok) {
-            document.getElementById("login-status").innerText = "로그인 실패!";
-            return;
-        }
-
-        let data = await res.json();
-        ACCESS_TOKEN = data.access_token;
-
-        // 저장
-        localStorage.setItem("token", ACCESS_TOKEN);
-
-        document.getElementById("login-status").innerText = "로그인 성공!";
-
-        // 로그인 박스 숨김
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("main-section").style.display = "flex";  // 공지 표시
-
-
-        loadNotices();
-
-    } catch (err) {
-        console.error("로그인 오류:", err);
-        document.getElementById("login-status").innerText = "서버 오류!";
-    }
-}
-
-
-
 const classColors = [
     "#E8F0FF",  // 강의 0 배경색
     "#FFF7D6",  // 강의 1 배경색
@@ -65,11 +15,7 @@ let selectedNoticeText = "";  // 사용자가 클릭한 공지 본문 저장
 // ------------------------------
 async function loadNotices() {
     try {
-        let res = await fetch("https://hufsmate-production.up.railway.app/notices", {
-            headers: {
-                "Authorization": "Bearer " + ACCESS_TOKEN
-            }
-        });
+        let res = await fetch("http://hufsmate-production.up.railway.app/notices");
         let data = await res.json();
 
         const container = document.getElementById("notice-list");
@@ -110,7 +56,7 @@ async function loadNotices() {
     }
 }
 
-// loadNotices();
+loadNotices();
 
 
 // ------------------------------
@@ -131,12 +77,9 @@ async function askAI() {
     spinner.style.display = "inline-block";
 
     try {
-        let res = await fetch("https://hufsmate-production.up.railway.app/summarize", {
+        let res = await fetch("http://hufsmate-production.up.railway.app/summarize", {
             method: "POST",
-            headers: { 
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + ACCESS_TOKEN
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 text: selectedNoticeText,
                 prompt: userPrompt
@@ -183,11 +126,8 @@ async function refreshCache() {
     status.innerText = "";
 
     try {
-        let res = await fetch("https://hufsmate-production.up.railway.app/refresh-cache", {
-            method: "POST",
-            headers: { 
-                "Authorization": "Bearer " + ACCESS_TOKEN
-            }
+        let res = await fetch("http://hufsmate-production.up.railway.app/refresh-cache", {
+            method: "POST"
         });
 
         let data = await res.json();
@@ -212,7 +152,3 @@ async function refreshCache() {
     button.disabled = false;
     button.innerText = "🔄 강의 목록 새로고침";
 }
-
-
-
-

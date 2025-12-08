@@ -19,43 +19,44 @@ let selectedNoticeText = "";  // 사용자가 클릭한 공지 본문 저장
 // ------------------------------
 async function loadNotices() {
     try {
-        const token = localStorage.getItem("hufsmate_token");
-
-        if (!token) {
-            alert("❗ 먼저 업로더로 공지를 업로드해야 합니다.");
-            return;
-        }
-
-        let res = await fetch(`https://hufsmate-production.up.railway.app/notices/${token}`);
+        let res = await fetch("https://hufsmate-production.up.railway.app/notices");
         let data = await res.json();
 
         const container = document.getElementById("notice-list");
         container.innerHTML = "";
 
-        const courseTitles = data.courses || [];
+        const courseTitles = data.courses || [];  // 강의명 리스트
 
         data.titles.forEach((classNotices, classIndex) => {
 
+            // --------------------------
+            // 강의 이름 헤더
+            // --------------------------
             const header = document.createElement("div");
             header.className = "lecture-header";
 
             let courseName = courseTitles[classIndex] || `강의 ${classIndex + 1}`;
+
             header.innerText = `📘 ${courseName}`;
             header.style.backgroundColor = classColors[classIndex];
-
             container.appendChild(header);
 
+            // --------------------------
+            // 강의별 공지 목록
+            // --------------------------
             classNotices.forEach((title, idx) => {
                 const item = document.createElement("div");
                 item.className = "notice-item";
                 item.innerText = title;
+
                 item.style.backgroundColor = classColors[classIndex] + "40";
 
                 item.onclick = () => {
                     selectedNoticeText = data.contents[classIndex][idx];
                     document.getElementById("notice-content").innerText = selectedNoticeText;
 
-                    document.querySelectorAll(".notice-item").forEach(el => el.classList.remove("selected"));
+                    document.querySelectorAll(".notice-item")
+                        .forEach(el => el.classList.remove("selected"));
                     item.classList.add("selected");
 
                     changeBackgroundGradient(classColors[classIndex]);
@@ -172,7 +173,6 @@ async function refreshCache() {
 function downloadUploader() {
     window.location.href = "https://github.com/YoonOhKwon/hufsmate/releases/download/1.0.0/hufsmate_uploader.exe";
 }
-
 
 
 

@@ -35,8 +35,9 @@ async function login() {
 
         // 로그인 박스 숨김
         document.getElementById("login-box").style.display = "none";
+        document.getElementById("main-section").style.display = "flex";  // 공지 표시
 
-        // 공지 불러오기 시작
+
         loadNotices();
 
     } catch (err) {
@@ -109,7 +110,7 @@ async function loadNotices() {
     }
 }
 
-loadNotices();
+// loadNotices();
 
 
 // ------------------------------
@@ -211,6 +212,7 @@ async function refreshCache() {
     button.disabled = false;
     button.innerText = "🔄 강의 목록 새로고침";
 }
+
 
 
 

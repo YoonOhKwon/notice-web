@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>공지 요약 AI  </title>
-  <link rel="stylesheet" href="style.css">
-  <button id="refresh-cache-button" onclick="refreshCache()">🔄 강의 목록 새로고침</button>
-  <span id="cache-status"></span>
+  <meta charset="UTF-8" />
+  <title>공지 요약 AI</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
+  <!-- 상단 메뉴 / 새로고침 버튼 -->
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+    <button id="refresh-cache-button" onclick="refreshCache()">🔄 강의 목록 새로고침</button>
+    <span id="cache-status"></span>
+  </div>
+
+  <!-- 로그인 박스 -->
   <div id="login-box" style="margin-bottom:20px;">
     <h3>로그인</h3>
     <input id="login-id" placeholder="아이디 입력" />
@@ -18,15 +23,15 @@
     <span id="login-status"></span>
   </div>
 
+  <h1>📢 공지 요약 AI Assistant - Made by YoonOh Kwon</h1>
 
-  <h1>📢 공지 요약 AI Assistant  -  Made by YoonOh Kwon</h1>
-
-  <div class="main">
+  <div class="main" id="main-section">
     <div class="left" id="notice-list"></div>
     <div class="right" id="notice-content">공지 내용을 선택해주세요.</div>
   </div>
 
-  <textarea id="user-command" placeholder="예: 요약해줘, 과제만 정리해줘, 중요한 내용만 말해줘"></textarea>
+  <textarea id="user-command"
+    placeholder="예: 요약해줘, 과제만 정리해줘, 중요한 내용만 말해줘"></textarea>
   <button id="ai-button" onclick="askAI()">AI 분석 요청하기</button>
   <div id="loading-spinner"></div>
 
@@ -35,4 +40,3 @@
   <script src="app.js"></script>
 </body>
 </html>
-

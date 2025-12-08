@@ -170,6 +170,9 @@ async function refreshCache() {
 }
 
 
+function downloadUploader() {
+    window.location.href = "https://github.com/YoonOhKwon/hufsmate/releases/download/1.0.0/hufsmate_uploader.exe";
+}
 
 
 

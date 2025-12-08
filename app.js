@@ -13,42 +13,52 @@ let selectedNoticeText = "";  // 사용자가 클릭한 공지 본문 저장
 // ------------------------------
 // 1) 공지 목록 불러오기
 // ------------------------------
+// ------------------------------
+// 1) 공지 목록 불러오기 (강의별 그룹화 추가)
+// ------------------------------
 async function loadNotices() {
     try {
         let res = await fetch("https://hufsmate-production.up.railway.app/notices");
         let data = await res.json();
 
         const container = document.getElementById("notice-list");
+        container.innerHTML = "";  // 초기화
 
-        // 공지 제목들 렌더링
         data.titles.forEach((classNotices, classIndex) => {
+
+            // ---------------------------------
+            // 강의 이름 헤더 추가
+            // ---------------------------------
+            const header = document.createElement("div");
+            header.className = "lecture-header";
+            header.innerText = `📘 강의 ${classIndex + 1}`;
+            header.style.backgroundColor = classColors[classIndex];
+            container.appendChild(header);
+
+            // ---------------------------------
+            // 강의별 공지들 추가
+            // ---------------------------------
             classNotices.forEach((title, idx) => {
                 const item = document.createElement("div");
                 item.className = "notice-item";
                 item.innerText = title;
 
-                // 🔥 공지 아이템에 강의별 배경색 적용
-                item.style.backgroundColor = classColors[classIndex] + "40";  
-                // 뒤의 40은 투명도(약 25%)
+                item.style.backgroundColor = classColors[classIndex] + "40";
 
-
-
-                // 공지 클릭 이벤트
                 item.onclick = () => {
                     selectedNoticeText = data.contents[classIndex][idx];
                     document.getElementById("notice-content").innerText = selectedNoticeText;
 
-                    // 기존 선택 제거
                     document.querySelectorAll(".notice-item")
                         .forEach(el => el.classList.remove("selected"));
                     item.classList.add("selected");
 
-                    // 🔥 클릭 시, 전체 배경을 그라데이션으로 변경
                     changeBackgroundGradient(classColors[classIndex]);
                 };
 
                 container.appendChild(item);
             });
+
         });
 
     } catch (err) {
@@ -56,7 +66,6 @@ async function loadNotices() {
     }
 }
 
-loadNotices();
 
 
 // ------------------------------
@@ -152,4 +161,5 @@ async function refreshCache() {
     button.disabled = false;
     button.innerText = "🔄 강의 목록 새로고침";
 }
+
 

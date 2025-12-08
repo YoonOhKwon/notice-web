@@ -10,6 +10,30 @@ const classColors = [
 
 let selectedNoticeText = "";  // 사용자가 클릭한 공지 본문 저장
 
+async function login() {
+    const id = document.getElementById("login-id").value;
+    const pw = document.getElementById("login-pw").value;
+
+    let res = await fetch("https://hufsmate-production.up.railway.app/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: id, password: pw })
+    });
+
+    let data = await res.json();
+
+    if (res.status !== 200) {
+        document.getElementById("login-status").innerText = "로그인 실패!";
+        return;
+    }
+
+    document.getElementById("login-box").style.display = "none";
+    document.getElementById("main-app").style.display = "block";
+
+    // 로그인 성공 후 공지 불러오기
+    loadNotices();
+}
+
 // ------------------------------
 // 1) 공지 목록 불러오기
 // ------------------------------
@@ -161,5 +185,6 @@ async function refreshCache() {
     button.disabled = false;
     button.innerText = "🔄 강의 목록 새로고침";
 }
+
 
 

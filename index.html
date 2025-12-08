@@ -4,8 +4,21 @@
   <meta charset="UTF-8">
   <title>공지 요약 AI</title>
   <link rel="stylesheet" href="style.css">
-  <button id="download-button" onclick="downloadUploader()">📥 업로드 도구 다운로드</button>
+  <button onclick="downloadUploader()">📥 업로드 도구 다운로드</button>
+  
+  <script>
+  function downloadUploader() {
+      const link = document.createElement("a");
+      link.href = "https://github.com/YoonOhKwon/hufsmate/releases/download/1.0.0/hufsmate_uploader.exe";
+      link.download = "hufsmate_uploader.exe";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  }
+  </script>
 
+
+  
 </head>
 
 <body>
@@ -35,5 +48,6 @@
   <script src="app.js"></script>
 </body>
 </html>
+
 
 

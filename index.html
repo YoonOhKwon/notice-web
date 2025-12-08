@@ -8,19 +8,10 @@
 
 <body>
 
-  <!-- 🔐 로그인 화면 -->
-  <div id="login-box" style="text-align:center; margin-top:40px;">
-    <h2>로그인</h2>
-    <input id="login-id" placeholder="Eclass ID 입력">
-    <br><br>
-    <input id="login-pw" type="password" placeholder="Eclass 비밀번호">
-    <br><br>
-    <button onclick="login()">로그인</button>
-    <div id="login-status" style="margin-top:10px; color:red;"></div>
-  </div>
+  
 
   <!-- 🔥 로그인 성공 시에만 보이는 메인 화면 -->
-  <div id="main-app" style="display:none;">
+  <div id="main-app" >
 
     <button id="refresh-cache-button" onclick="refreshCache()">🔄 강의 목록 새로고침</button>
     <span id="cache-status"></span>
@@ -42,3 +33,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>공지 요약 AI  </title>
+  <link rel="stylesheet" href="style.css">
+  <button id="refresh-cache-button" onclick="refreshCache()">🔄 강의 목록 새로고침</button>
+  <span id="cache-status"></span>
+</head>
+
+<body>
+
+  <h1>📢 공지 요약 AI Assistant  -  Made by YoonOh Kwon</h1>
+
+  <div class="main">
+    <div class="left" id="notice-list"></div>
+    <div class="right" id="notice-content">공지 내용을 선택해주세요.</div>
+  </div>
+
+  <textarea id="user-command" placeholder="예: 요약해줘, 과제만 정리해줘, 중요한 내용만 말해줘"></textarea>
+  <button id="ai-button" onclick="askAI()">AI 분석 요청하기</button>
+  <div id="loading-spinner"></div>
+
+  <div id="result"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

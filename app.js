@@ -25,7 +25,7 @@ async function loadNotices() {
         const container = document.getElementById("notice-list");
         container.innerHTML = "";
 
-        const courseTitles = data.course_titles || [];  // 강의명 리스트
+        const courseTitles = data.courses || [];  // 강의명 리스트
 
         data.titles.forEach((classNotices, classIndex) => {
 
@@ -173,6 +173,7 @@ async function refreshCache() {
 function downloadUploader() {
     window.location.href = "https://github.com/YoonOhKwon/hufsmate/releases/download/1.0.0/hufsmate_uploader.exe";
 }
+
 
 
 

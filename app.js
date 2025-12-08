@@ -66,7 +66,7 @@ async function loadNotices() {
     }
 }
 
-
+loadNotices();
 
 // ------------------------------
 // 2) AI 분석 요청 보내기

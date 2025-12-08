@@ -23,22 +23,27 @@ async function loadNotices() {
         let data = await res.json();
 
         const container = document.getElementById("notice-list");
-        container.innerHTML = "";  // 초기화
+        container.innerHTML = "";
+
+        const courseTitles = data.course_titles || [];  // 강의명 리스트
 
         data.titles.forEach((classNotices, classIndex) => {
 
-            // ---------------------------------
-            // 강의 이름 헤더 추가
-            // ---------------------------------
+            // --------------------------
+            // 강의 이름 헤더
+            // --------------------------
             const header = document.createElement("div");
             header.className = "lecture-header";
-            header.innerText = `📘 강의 ${classIndex + 1}`;
+
+            let courseName = courseTitles[classIndex] || `강의 ${classIndex + 1}`;
+
+            header.innerText = `📘 ${courseName}`;
             header.style.backgroundColor = classColors[classIndex];
             container.appendChild(header);
 
-            // ---------------------------------
-            // 강의별 공지들 추가
-            // ---------------------------------
+            // --------------------------
+            // 강의별 공지 목록
+            // --------------------------
             classNotices.forEach((title, idx) => {
                 const item = document.createElement("div");
                 item.className = "notice-item";
@@ -66,7 +71,6 @@ async function loadNotices() {
         console.error("공지 불러오기 오류:", err);
     }
 }
-
 
 loadNotices();
 
@@ -164,6 +168,7 @@ async function refreshCache() {
     button.disabled = false;
     button.innerText = "🔄 강의 목록 새로고침";
 }
+
 
 
 

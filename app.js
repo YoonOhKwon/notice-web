@@ -15,7 +15,7 @@ let selectedNoticeText = "";  // 사용자가 클릭한 공지 본문 저장
 // ------------------------------
 async function loadNotices() {
     try {
-        let res = await fetch("http://hufsmate-production.up.railway.app/notices");
+        let res = await fetch("https://hufsmate-production.up.railway.app/notices");
         let data = await res.json();
 
         const container = document.getElementById("notice-list");
@@ -77,7 +77,7 @@ async function askAI() {
     spinner.style.display = "inline-block";
 
     try {
-        let res = await fetch("http://hufsmate-production.up.railway.app/summarize", {
+        let res = await fetch("https://hufsmate-production.up.railway.app/summarize", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -126,7 +126,7 @@ async function refreshCache() {
     status.innerText = "";
 
     try {
-        let res = await fetch("http://hufsmate-production.up.railway.app/refresh-cache", {
+        let res = await fetch("https://hufsmate-production.up.railway.app/refresh-cache", {
             method: "POST"
         });
 
@@ -152,3 +152,4 @@ async function refreshCache() {
     button.disabled = false;
     button.innerText = "🔄 강의 목록 새로고침";
 }
+

@@ -89,10 +89,10 @@ userCommandEl.addEventListener("keydown", (e) => {
 // 2) AI 분석 요청 보내기
 // ------------------------------
 async function askAI() {
-    if (!selectedNoticeText) {
-        alert("먼저 공지를 선택하세요!");
-        return;
-    }
+    // if (!selectedNoticeText) {
+    //     alert("먼저 공지를 선택하세요!");
+    //     return;
+    // }
 
     const userPrompt = document.getElementById("user-command").value;
     const button = document.getElementById("ai-button");
@@ -184,6 +184,7 @@ async function refreshCache() {
 function downloadUploader() {
     window.location.href = "https://github.com/YoonOhKwon/hufsmate/releases/download/1.0.0/hufsmate_uploader.exe";
 }
+
 
 
 

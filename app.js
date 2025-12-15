@@ -1,5 +1,5 @@
 const classColors = [
-    "#E8F0FF",  // 강의 0 배경색
+    "#FAFBFA",  // 강의 0 배경색
     "#FFF7D6",  // 강의 1 배경색
     "#E8FFE8",  // 강의 2 배경색
     "#FFE8F0",  // 강의 3 배경색
@@ -184,6 +184,7 @@ async function refreshCache() {
 function downloadUploader() {
     window.location.href = "https://github.com/YoonOhKwon/hufsmate/releases/download/1.0.0/hufsmate_uploader.exe";
 }
+
 
 
 

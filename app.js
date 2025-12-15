@@ -74,6 +74,16 @@ async function loadNotices() {
 
 loadNotices();
 
+const userCommandEl = document.getElementById("user-command");
+userCommandEl.addEventListener("keydown", (e) => {
+    if (e.isComposing) return; // 한글 조합 중 Enter 오작동 방지
+
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        askAI();
+    }
+});
+
 
 // ------------------------------
 // 2) AI 분석 요청 보내기
@@ -103,7 +113,8 @@ async function askAI() {
         });
 
         let data = await res.json();
-        document.getElementById("result").innerText = data.result;
+        document.getElementById("user-command").value = data.result; // ✅ 답을 프롬프트창에 표시
+        document.getElementById("result").innerText = "";    
 
     } catch (err) {
         console.error("AI 요청 오류:", err);
@@ -173,6 +184,7 @@ async function refreshCache() {
 function downloadUploader() {
     window.location.href = "https://github.com/YoonOhKwon/hufsmate/releases/download/1.0.0/hufsmate_uploader.exe";
 }
+
 
 
 

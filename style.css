@@ -57,7 +57,9 @@ textarea {
   border-radius: 10px;
   border: 1px solid #ccc;
   margin-top: 20px;
-  font-size: 15px;
+
+  font-size: 13px;    
+  color: #BFC7D1;      
 }
 
 button {
@@ -128,4 +130,5 @@ button.loading {
   }
 
 }
+
 
